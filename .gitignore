@@ -1,0 +1,13 @@
+.env
+google-service-account.json
+*.secret.json
+
+transactions.csv
+financial_report.txt
+
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
