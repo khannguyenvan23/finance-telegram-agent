@@ -4,6 +4,7 @@ google-service-account.json
 
 transactions.csv
 financial_report.txt
+bot.log
 
 __pycache__/
 *.py[cod]

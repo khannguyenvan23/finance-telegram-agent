@@ -1,0 +1,8 @@
+Bot hỗ trợ lệnh /tongchi để xem tổng chi.
+Bot hỗ trợ lệnh /tongthu để xem tổng thu.
+Bot hỗ trợ lệnh /tongket để xem tổng kết tài chính.
+Bot hỗ trợ lệnh /lichsu để xem lịch sử giao dịch gần nhất.
+Bot hỗ trợ lệnh /baocao để xuất báo cáo.
+Lỗi SpreadsheetNotFound thường do chưa chia sẻ Google Sheet cho service account.
+Lỗi Missing credentials thường do thiếu OPENAI_API_KEY trong file .env.
+Lỗi TELEGRAM_BOT_TOKEN thường do thiếu token bot Telegram trong file .env.
