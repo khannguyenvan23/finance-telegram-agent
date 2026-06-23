@@ -14,11 +14,20 @@ client = OpenAI()
 CSV_FILE = Path("transactions.csv")
 REPORT_FILE = Path("financial_report.txt")
 GOOGLE_CREDENTIALS_FILE = "google-service-account.json"
-GOOGLE_SHEET_NAME = "Quan ly tai chinh"
-GOOGLE_WORKSHEET_NAME = "Giao dịch"
+GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Quan ly tai chinh")
+GOOGLE_WORKSHEET_NAME = os.getenv("GOOGLE_WORKSHEET_NAME", "Giao dịch")
+
+
 def get_google_worksheet():
-    client = gspread.service_account(filename=GOOGLE_CREDENTIALS_FILE)
-    spreadsheet = client.open(GOOGLE_SHEET_NAME)
+    credentials_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+
+    if credentials_json:
+        credentials_info = json.loads(credentials_json)
+        sheets_client = gspread.service_account_from_dict(credentials_info)
+    else:
+        sheets_client = gspread.service_account(filename=GOOGLE_CREDENTIALS_FILE)
+
+    spreadsheet = sheets_client.open(GOOGLE_SHEET_NAME)
     return spreadsheet.worksheet(GOOGLE_WORKSHEET_NAME)
 # def test_google_sheet_write():
 #     worksheet = get_google_worksheet()

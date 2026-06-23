@@ -37,6 +37,8 @@ Mở file `.env` và điền key thật:
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
+GOOGLE_SHEET_NAME=Quan ly tai chinh
+GOOGLE_WORKSHEET_NAME=Giao dịch
 ```
 
 Không đưa file `.env` lên GitHub.
@@ -47,6 +49,12 @@ Không đưa file `.env` lên GitHub.
 
 ```text
 google-service-account.json
+```
+
+Khi deploy lên cloud, không upload file JSON. Thay vào đó, copy toàn bộ nội dung file JSON thành một dòng và lưu vào biến môi trường:
+
+```env
+GOOGLE_SERVICE_ACCOUNT_JSON={"type":"service_account","project_id":"..."}
 ```
 
 Trong Google Sheet, tạo hàng tiêu đề đầu tiên:
@@ -72,6 +80,32 @@ python finance_agent.py
 ```
 
 Nếu chạy đúng, terminal sẽ báo bot đang chạy. Sau đó mở Telegram và nhắn tin cho bot.
+
+## Deploy 24/7
+
+Bot này chạy dạng worker/background process bằng polling Telegram. Start command:
+
+```text
+python finance_agent.py
+```
+
+Nếu nền tảng deploy hỗ trợ `Procfile`, project đã có:
+
+```text
+worker: python finance_agent.py
+```
+
+Khi deploy, cần thêm các biến môi trường:
+
+```text
+OPENAI_API_KEY
+TELEGRAM_BOT_TOKEN
+GOOGLE_SHEET_NAME
+GOOGLE_WORKSHEET_NAME
+GOOGLE_SERVICE_ACCOUNT_JSON
+```
+
+Không đưa `.env` hoặc `google-service-account.json` lên server qua Git.
 
 ## Ví Dụ Tin Nhắn
 
